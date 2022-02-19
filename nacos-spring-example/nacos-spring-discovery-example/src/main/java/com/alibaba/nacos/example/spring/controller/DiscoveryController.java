@@ -1,9 +1,11 @@
 package com.alibaba.nacos.example.spring.controller;
 
 import com.alibaba.nacos.api.annotation.NacosInjected;
+import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +22,18 @@ public class DiscoveryController {
     @NacosInjected
     private NamingService namingService;
 
+    @NacosValue(value = "${useLocalCache}",autoRefreshed = true)
+    private String useLocalCache;
+
     @RequestMapping(value = "/get", method = GET)
     @ResponseBody
     public List<Instance> get(@RequestParam String serviceName) throws NacosException {
         return namingService.getAllInstances(serviceName);
+    }
+
+    @RequestMapping(value = "query",method = GET)
+    @ResponseBody
+    public String query(@RequestParam String serviceName){
+        return "key:"+useLocalCache;
     }
 }

@@ -13,6 +13,7 @@
 
     <!-- Spring MVC Annotation-Driven -->
     <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
 
     <!-- Spring Context Annotation-Driven -->
     <context:annotation-config/>

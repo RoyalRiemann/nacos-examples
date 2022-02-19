@@ -23,11 +23,11 @@ public class ConfigController {
     private ConfigService configService;
 
     @NacosValue(value = "${useLocalCache:false}", autoRefreshed = true)
-    private boolean useLocalCache;
+    private String useLocalCache;
 
     @RequestMapping(value = "/get", method = GET)
     @ResponseBody
-    public boolean get() {
+    public String get() {
         return useLocalCache;
     }
 
