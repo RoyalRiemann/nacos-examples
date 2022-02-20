@@ -22,8 +22,8 @@ public class DiscoveryController {
     @NacosInjected
     private NamingService namingService;
 
-    @NacosValue(value = "${useLocalCache}",autoRefreshed = true)
-    private String useLocalCache;
+    @NacosValue(value = "${appKeys:wx12xww12ssf}", autoRefreshed = true)
+    private String appKeys;
 
     @RequestMapping(value = "/get", method = GET)
     @ResponseBody
@@ -31,9 +31,9 @@ public class DiscoveryController {
         return namingService.getAllInstances(serviceName);
     }
 
-    @RequestMapping(value = "query",method = GET)
+    @RequestMapping(value = "query", method = GET)
     @ResponseBody
-    public String query(@RequestParam String serviceName){
-        return "key:"+useLocalCache;
+    public String query() {
+        return "keys:" + appKeys;
     }
 }
